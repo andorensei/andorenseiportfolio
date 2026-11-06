@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>都市の信号と固定ギア | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型B ： コンセプト文を「頭」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       コンセプト文
+       大きい写真 ＋ サムネイル列
+       本文          ← 使わないときは、このかたまりごと消す
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけでは何か分からない作品(web・プロダクト・企画もの)
+     に向いています。先に考え方を渡してから作品を見せる形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>都市の信号と固定ギア</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2026/ Diagram</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">「都市の信号周期」と「固定ギアによる身体負荷」の関係</p>
+</header>
+
+
+<!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p><b>Concept</b></p>
+  <p>ギアが固定されたピストバイクは、後輪とペダルが常に連動しているため空転しない。普通の自転車のように足を止めて惰性で進むことができず、信号待ちでも足をつかずに「スタンディング」でバランスを取り続ける。つまり、ピストに乗っている間、身体は休むことがない。本作では、都市の信号による「発進」と、脚の力でペダルを抑え込む「減速」が、どのように身体の負荷として現れるのかに着目し、心拍数の変化を地図上に可視化した。</p>
+</div>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work5,1.jpg" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work5/movie.mp4"
+       data-type="audio" data-src="img/work5/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work5,1.jpg" data-alt="作品写真 1枚目">
+      <img src="img/work5,1.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work5,2.jpg" data-alt="作品写真 2枚目">
+      <img src="img/work5,2.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work5,3.jpg" data-alt="作品写真 3枚目">
+      <img src="img/work5,3.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work5,4.jpg" data-alt="作品写真 4枚目">
+      <img src="img/work5,4.jpg" alt=""></button>
+
+ 
+  </div>
+</div>
+
+
+<!-- ■ text ──────────────────────────────────────────────
+     ★ 本文。使わない作品では、この ■ text のかたまりを
+        まるごと消してください(消しても成立します)      -->
+<div class="b b-text">
+  <p>信濃町駅から明治神宮外苑・国立競技場を一周する、走りやすいルートを選び、実際にピストバイクで走った。Apple Watchを着けた状態で、Nikeの計測アプリとスピードメーターを使い、心拍数と信号の位置を記録した。</p>
+  <p>表現では、心拍数と地図上の位置が一目で一致して分かるように、心拍数をルートに沿った線の高さとして重ねた。色は暗い背景との明度差がはっきり出る黄色を選び、ダイアグラムとしての読みやすさを優先した。</p>
+</div>
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>Illustrator</dd>
+    <dt>サイズ</dt><dd>297mm × 420mm</dd>
+    <dt>制作年</dt><dd>2026年</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work6.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

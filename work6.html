@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Urban Lib | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型B ： コンセプト文を「頭」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       コンセプト文
+       大きい写真 ＋ サムネイル列
+       本文          ← 使わないときは、このかたまりごと消す
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけでは何か分からない作品(web・プロダクト・企画もの)
+     に向いています。先に考え方を渡してから作品を見せる形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>Urban Lib</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2025 / Editorial</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">漕ぎ出す一杯、止まるひととき。</p>
+</header>
+
+
+<!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p><b>Concept</b></p>
+  <p>ピストバイクに乗る人は、どんなカフェに立ち寄りたくなるのか。カフェを紹介する記事は数多くあるが、そこまでの交通手段や、どんな人が好むのかまで語られることは少ない。本作は、ピストバイクというカルチャーと、カフェでの「休憩」を掛け合わせ、ライフスタイルにピストバイクを取り入れた人たちに向けて制作した雑誌である。
+タイトルの「Urban Lib」は、Urban(都会の)とLib(Libertyの略=自由)を組み合わせた造語。ピストバイクは他の自転車に比べて自由な動きを得意とし、そのカルチャーもまた何かに縛られない。都市の中を自由に走る人たちが、ふと止まりたくなる場所を提案することを目指した。</p>
+</div>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work6,1.png" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work6/movie.mp4"
+       data-type="audio" data-src="img/work6/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work6,1.png" data-alt="作品写真 1枚目">
+      <img src="img/work6,1.png" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work6,2.png" data-alt="作品写真 2枚目">
+      <img src="img/work6,2.png" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work6,3.png" data-alt="作品写真 3枚目">
+      <img src="img/work6,3.png" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work6,4.png" data-alt="作品写真 4枚目">
+      <img src="img/work6,4.png" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work6,5.png" data-alt="作品写真 5枚目">
+      <img src="img/work6,5.png" alt=""></button>
+
+  </div>
+</div>
+
+
+<!-- ■ text ──────────────────────────────────────────────
+     ★ 本文。使わない作品では、この ■ text のかたまりを
+        まるごと消してください(消しても成立します)      -->
+<div class="b b-text">
+
+  <p>自分自身もピストバイクに乗っている。だからこそ、ネットの情報だけに頼らず、行き先を決めずに実際に走りながら店を探した。
+走ってみて分かったのは、チェーン店は駐輪の問題で立ち寄りにくいということだった。一方で、立ち寄りやすいと感じた店には共通点があった。個人経営で、店員とお客さんの距離が近く、地域に根ざしていること。人柄のいいオーナーが多く、カルチャーへの理解があること。そして、駅から離れていること。電車では行きにくい場所が、自転車だからこそ行きやすい場所になる。この発見が、店選びの軸になった。</p>
+</div>
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>Indesign、Illustrator、Lightroom</dd>
+    <dt>サイズ</dt><dd>210mm　×　297mm</dd>
+    <dt>制作年</dt><dd>2025年</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work7.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

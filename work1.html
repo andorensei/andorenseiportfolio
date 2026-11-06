@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>気配 — 不在の感覚 | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型A ： コンセプト文を「尻」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       大きい写真 ＋ サムネイル列
+       本文
+       コンセプト文
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけで何か分かる作品(写真作品など)に向いています。
+     先に作品でひっかけて、最後に考え方で回収する形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>気配 — 不在の感覚</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2026~ / 写真</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">写真には写っていないのに気配がする。</p>
+</header>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work1,1.jpg" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work1/movie.mp4"
+       data-type="audio" data-src="img/work1/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work1,1.jpg" data-alt="作品写真 1枚目">
+      <img src="img/work1,1.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1,2.jpg" data-alt="作品写真 2枚目">
+      <img src="img/work1,2.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1,3.jpg" data-alt="作品写真 3枚目">
+      <img src="img/work1,3.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1,4.jpg" data-alt="作品写真 4枚目">
+      <img src="img/work1,4.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1,5.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work1,5.jpg" alt=""></button>
+    
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1,6.jpg" data-alt="作品写真 6枚目">
+      <img src="img/work1,6.jpg" alt=""></button>
+    
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1,7.jpg" data-alt="作品写真 7枚目">
+      <img src="img/work1,7.jpg" alt=""></button>
+
+  </div>
+</div>
+
+<!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p><b>Concept</b></p>
+   <p>閑静な空き地にポツンと置かれた一脚の椅子を見つけた。違和感を覚えると同時に、魅力を感じた。その魅力を深掘りしていくと、人物は写っていないのに、「誰かがいた」という気配を感じてしまう。この実感が、この研究の出発点である。 </p>
+
+ <p>写真の中には、二つの層があると考えた。一つは、写っている物が、撮影の瞬間確かにそこにあったという、物の実在の層である。これはロラン・バルトが『明るい部屋』で写真の本質と定義した「かつてそこにあった」ことで、写真が証明している部分だ。もう一つは、そこにいたかもしれない誰かや、あったかもしれない何かのように、今はそこにいない存在を、証明されていないのに感じてしまう層である。この存在を、気配と定義する。 </p>
+
+ <p>研究として注目しているのは、写真で証明されている存在と、証明されていない存在(気配)の間で起きていることだ。写真は、物がそこにあったことを証明する。その確かさがあるからこそ、証明されていない気配まで、確かなものとして感じてしまうのではないか。写真というメディアの特性に関わるこの見立てを、撮りながら探っている。 </p>
+
+ <p>撮影場所は、街を歩いて探す。人がいるべき場所にいない、誰かの痕跡がある、廃れた場所。撮るかどうかは、自分の感覚に委ねている。痕跡がはっきり残る場所と、ほとんど何もない場所の両方を撮り、確かさの違いが、気配の感じ方をどう変えるのかを見ている。 </p>
+
+ <p>作品としては、撮る場所や切り取り方で自分の視点は示すが、答えは提示しない。届けたいのは、気配に気づくきっかけ、その入り口である。何を感じるか、あるいは何も感じないかも含めて、受け取り方は見る人に委ねている。 </p>
+
+ <p>そして、この作品を入り口に、普段の生活の中でも、目にしていなかったものや「不在の感覚」に気づけるようになってほしい。 </p>
+
+
+  
+</div>
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>Lightroom、Photoshop</dd>
+    
+    <dt>制作年</dt><dd>2026~</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work2.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

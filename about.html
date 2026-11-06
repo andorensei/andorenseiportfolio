@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABOUT — ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/about.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABOUT ページ
+
+     左 ＝ 緑のパネル(トップページのパソコン画面と同じ素材)
+     右 ＝ 使えるソフトのアイコン6つ
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ アイコンは img/icon/01.png 〜 06.png を
+        自分のものに差し替えるだけ。正方形の画像を入れてください。
+     ══════════════════════════════════════════════════════════ -->
+
+<body data-enter="screen" class="page-about">
+
+<a class="wall-title" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+
+<div class="about">
+
+  <!-- ───────── 左 : 自己紹介 ───────── -->
+  <div class="about__panel">
+
+    <p class="about__label">ABOUT</p>
+
+    <!-- ★ 名前 -->
+    <h1 class="about__name">ANDO RENSEI</h1>
+
+    <!-- ★ 基本情報 -->
+    <p class="about__meta">2008年生まれ。東京・世田谷区出身。都立工芸高校グラフィックアーツ科在籍。</p>
+
+    <div class="about__body">
+      <!-- ★ ここが本体。自分が何を見ている人なのかを2段落くらいで -->
+      <p>見過ごされているものや名前のない感覚を、写真を軸に、複数のメディアを組み合わせて作品にしている。</p>
+
+      <!-- ★ 扱ってきた媒体。いらなければこの p ごと消す -->
+      <p>写真 ／ 製本 ／ グラフィック ／ Web ／ 3DCG </p>
+    </div>
+
+    <!-- ★ 連絡先。SNS を足すときは a をコピーする -->
+    <p class="about__contact">
+      <a href="maito:[メールアドレス]">Instagram : andorensei</a>
+    </p>
+
+  </div>
+
+
+  <!-- ───────── 右 : 使えるソフト ─────────
+       ★ img を差し替えて、span にソフト名を書くだけ。
+          6個より増やしたいときは li をコピーしてください    -->
+  <section class="tools">
+
+    <h2 class="tools__label">TOOLS</h2>
+
+    <ul class="tools__grid">
+      <li class="tool"><img src="img/Illustrator.png" alt=""><span>Illustrator</span></li>
+      <li class="tool"><img src="img/indesign.png" alt=""><span>Indesign</span></li>
+      <li class="tool"><img src="img/photoshop.png" alt=""><span>Photoshop</span></li>
+      <li class="tool"><img src="img/Lightroom.png" alt=""><span>Lightroom</span></li>
+      <li class="tool"><img src="img/blender.svg" alt=""><span>Blender</span></li>
+      <li class="tool"><img src="img/phoenixcode.png" alt=""><span>Phoenix code</span></li>
+    </ul>
+
+  </section>
+
+</div>
+
+<script src="js/transition.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>感覚 | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型A ： コンセプト文を「尻」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       大きい写真 ＋ サムネイル列
+       本文
+       コンセプト文
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけで何か分かる作品(写真作品など)に向いています。
+     先に作品でひっかけて、最後に考え方で回収する形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>感拡</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2025/ PRODUCT</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">五感を開いたまま、まだ名前のないカルチャーに立ち会うための試み。</p>
+</header>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work3,1.jpg" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work3/movie.mp4"
+       data-type="audio" data-src="img/work3/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work3,1.jpg" data-alt="作品写真 1枚目">
+      <img src="img/work3,1.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work3,2.jpg" data-alt="作品写真 2枚目">
+      <img src="img/work3,2.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work3,3.jpg" data-alt="作品写真 3枚目">
+      <img src="img/work3,3.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work3,4.jpg" data-alt="作品写真 4枚目">
+      <img src="img/work3,4.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work3,5.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work3,5.jpg" alt=""></button>
+
+     <button type="button" class="thumb"
+            data-type="image" data-src="img/work3,6.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work3,6.jpg" alt=""></button>
+
+  </div>
+</div>
+
+  <!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p>Concept</p>
+  <p>感拡（かんかく）は、ファッション・音楽・映像・グラフィック・空間表現などを横断する、独立したクリエイティブプロジェクトである。
+
+SNSやストリーミングサービスの普及によって、表現の発信とアクセスは容易になった。一方で、情報の過剰な流通は作品の希少性を薄め、カルチャーを短期的な消費へと変化させている。
+
+アーティストは商業性と独自性の間で立ち位置を模索し、オンラインと現場のコミュニティは分断されていく。オーディエンスもまた、作品を消費することに慣れ、現場に足を運び、カルチャーを実体験する機会や意識が希薄になりつつある。
+
+感拡は、アーティストとオーディエンス、オンラインとリアルの境界を再接続することを試みる。単に作品を発信し、消費される関係ではなく、プロダクトやイベント、クリエイティブを通じて、新たな接点と体験を生み出す。
+
+ただし、場を用意するだけでは人は現場に来ない。画面で済むものを現場でもう一度なぞるなら、行く理由がないからだ。
+
+自分たちが向き合いたいカルチャーは、まだ名前がついていない。誰にも定義されていない。だからこそ、そこに立ち会うことに意味がある。
+
+音楽を、鑑賞するだけの体験で終わらせたくない。演者と客の境界を必要以上に引かず、近い距離で音を浴びる。その場の空気ごと、身体で受け止める。
+
+感拡は「感覚拡張」の略である。五感を開いたまま、まだ名前のないカルチャーに立ち会うための試み。</p>
+</div>
+
+
+<!-- ■ text ──────────────────────────────────────────────
+     ★ 本文。段落は p で区切る。何段落でも可          -->
+<div class="b b-text">
+  <p>vol.1「起工」は工事現場を会場として想定している。フライヤーに出てくる看板とコーンは、実在の現場を撮影したものではなく Blender でモデリングした。まだ存在していない会場だから、素材も建てるところから始めた。 </p>
+
+ <p>ステッカーには、感覚を拡張したピクトグラムをつくった。工事現場の標識と同じ記号の作り方をしながら、注意や禁止ではなく、その場で起きていることを表している。 </p>
+
+ <p>服は 103point というブランドのデザインで、これも立ち上げを想定したものである。名前は、周りのコレクティブのメンバーが集まる場所から取った。人が実際に集まっている場所の名前を、そのままブランド名にしている。デザインはシルクスクリーンで一枚ずつ刷った。データを配って量産するのではなく、手で刷って物として渡す。 </p>
+
+ <p>出演者だけは、実際に足を運んで決めている。ストリーミングで聴いた印象と、その場で浴びたときの印象は違う。生で聴いたときに、録音では分からなかったものがあった人を選んでいる。この企画が言っていることを、出演者の選び方でも実行している。
+フライヤーに出ている BlueLotus は自分のラッパー名である。 </p>
+</div>
+
+
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>Lightroom、Illustrator、blender、シルクスクリーン、紙</dd>
+    
+    <dt>制作年</dt><dd>2025年</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work4.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

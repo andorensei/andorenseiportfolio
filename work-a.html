@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>気配 — 不在の感覚 | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型A ： コンセプト文を「尻」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       大きい写真 ＋ サムネイル列
+       本文
+       コンセプト文
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけで何か分かる作品(写真作品など)に向いています。
+     先に作品でひっかけて、最後に考え方で回収する形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>気配 — 不在の感覚</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2025 / 写真</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">誰もいない部屋に、さっきまで誰かがいた。その残りかたを写真で確かめた。</p>
+</header>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work1/01.jpg" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work1/movie.mp4"
+       data-type="audio" data-src="img/work1/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work1/01.jpg" data-alt="作品写真 1枚目">
+      <img src="img/work1/01.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1/02.jpg" data-alt="作品写真 2枚目">
+      <img src="img/work1/02.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1/03.jpg" data-alt="作品写真 3枚目">
+      <img src="img/work1/03.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1/04.jpg" data-alt="作品写真 4枚目">
+      <img src="img/work1/04.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work1/05.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work1/05.jpg" alt=""></button>
+
+  </div>
+</div>
+
+
+<!-- ■ text ──────────────────────────────────────────────
+     ★ 本文。段落は p で区切る。何段落でも可          -->
+<div class="b b-text">
+  <p>ここに制作の経緯を書きます。なぜ撮りはじめたのか、何を見ていたのか、どこで撮ったのか。</p>
+  <p>ここに考えたことを書きます。撮っているうちに気づいたこと、途中で変わった考え、うまくいかなかったこと。</p>
+</div>
+
+
+<!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p>ここにコンセプト文を書きます。この作品を通して何を考えていたのか、どういう見方をしているのか。</p>
+  <p>本文より大きく、前後が広く空くので、ここが核だと分かるようになっています。</p>
+</div>
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>ゼラチンシルバープリント</dd>
+    <dt>サイズ</dt><dd>H297 × W420 mm ／ 全8点</dd>
+    <dt>制作年</dt><dd>2025</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work-b.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOISE | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型B ： コンセプト文を「頭」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       コンセプト文
+       大きい写真 ＋ サムネイル列
+       本文          ← 使わないときは、このかたまりごと消す
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけでは何か分からない作品(web・プロダクト・企画もの)
+     に向いています。先に考え方を渡してから作品を見せる形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>NOISE</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2025/Web</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">どこか歪んだノイズのように街の中に漂っている。</p>
+</header>
+
+
+<!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p><b>Concept</b></p>
+   <p>東京という都市では、毎日同じような光景が繰り返されている</p>
+
+ <p>朝、駅へ向かい、電車に乗り、同じ時間に同じ場所へ向かう人々。 </p>
+  
+   <p>それはあまりにも当たり前の風景であり、
+誰も疑うことなく受け入れている「日常」である。
+しかし、その風景を少し離れた視点から見たとき、
+そこには言葉にできない違和感が残っているように感じた。</p>
+  
+   <p> 疲れた表情の通勤者、満員電車の静かな圧迫感、
+交差点を埋め尽くす無数の人の流れ。</p>
+
+ <p>それらは日常の一部でありながら、
+どこか歪んだノイズのように街の中に漂っている。
+本作品では、その「日常に潜むノイズ」をテーマに、
+東京の風景を写真でWebという空間の中に再構成した。
+普段は見過ごされてしまう瞬間を切り取り、ノイズとして重ねていくことで、
+都市のもう一つの側面を浮かび上がらせる。
+この作品は、東京という都市を批判するためのものではない。</p>
+
+ <p>むしろ、私たちが無意識に受け入れている日常を、
+もう一度静かに見つめ直すための装置である。
+このサイトを通して、鑑賞者には
+東京の風景をゆっくりと歩くように体験してほしい。</p>
+
+ <p>そして、その中に潜む小さな違和感やノイズに気づいたとき、
+見慣れたはずの都市の景色が、少しだけ違って見えることを願っている。</p>
+
+</div>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work2,1.jpg" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work2/movie.mp4"
+       data-type="audio" data-src="img/work2/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work2,1.jpg" data-alt="作品写真 1枚目">
+      <img src="img/work2,1.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work2,2.jpg" data-alt="作品写真 2枚目">
+      <img src="img/work2,2.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work2,6.png" data-alt="作品写真 3枚目">
+      <img src="img/work2,6.png" alt=""></button>
+    
+      <button type="button" class="thumb"
+            data-type="video" data-src="img/movie.mov">
+      <img src="img/work2,7.png" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work2,3.jpg" data-alt="作品写真 4枚目">
+      <img src="img/work2,3.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work2,4.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work2,4.jpg" alt=""></button>
+   
+    
+
+
+  </div>
+</div>
+
+
+<!-- ■ text ──────────────────────────────────────────────
+     ★ 本文。使わない作品では、この ■ text のかたまりを
+        まるごと消してください(消しても成立します)      -->
+<div class="b b-text">
+  <p>Webという媒体で制作する授業の中で、その性質を活かすことを考えた。Webでは、鑑賞者が自分でカーソルを動かし、ページをスライドさせていく。この動き自体が、一種のインスタレーションになるのではないかと考えた。
+自分の生活は、慣れてしまうと一歩引いて観察することが難しい。だからこそ、東京の街を散歩するような感覚で、当たり前の日常を少し離れた視点から体験できる形にした。作品は五章に分かれ、家を出て電車に乗り、帰宅するまでの一日の流れで構成している。
+撮影したのは特別なものではなく、「東京ってこんな感じ」という当たり前の風景である。嫌だけれど仕方がないと受け入れていることを、もう一度捉え直せるような写真を選んだ。慣れているだけで、それは本当にあるべき姿なのだろうか。
+作り終えて、全員がこの冷たさや嫌な感覚を抱えているわけではないとも感じた。ノイズは街の中に最初からあるのではなく、慣れた日常から一歩引いたときに、初めて立ち上がるものなのかもしれない。</p>
+</div>
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>Phoenix Cord（HTML/CSS）、Lightroom</dd>
+    <dt>制作年</dt><dd>2025年</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work3.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

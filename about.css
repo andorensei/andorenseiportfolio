@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+/* ============================================================
+   about.html 専用
+
+   style.css のあとに読み込んでください。
+   (style.css はページ遷移の演出のために必要です)
+
+   左 ＝ 緑のパネル(トップページのパソコン画面と同じ素材)
+   右 ＝ 使えるソフトのアイコン6つ
+   ============================================================ */
+
+:root {
+  --edge: 5.5vw;
+  --wrap: 1180px;        /* 作品ページと同じ幅。左端がそろいます */
+}
+
+.page-about {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ずっと出ている名前(ホームに戻る)。左端は下の中身とそろえてあります */
+.page-about .wall-title {
+  position: fixed;
+  left: max(var(--edge), calc((100% - var(--wrap)) / 2));
+  top: 2.2vw;
+}
+
+
+.about {
+  width: min(100% - var(--edge) * 2, var(--wrap));
+  margin: 0 auto;
+  min-height: 100svh;
+  align-content: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;      /* パネルと TOOLS の上端をそろえる */
+  gap: clamp(32px, 5vw, 86px);
+  padding: clamp(110px, 17svh, 190px) 0 clamp(70px, 11svh, 120px);
+}
+
+
+/* ---------- 左 : 緑のパネル ---------- */
+
+.about__panel {
+  position: relative;
+  max-width: 620px;
+  padding: clamp(26px, 2.7vw, 44px);
+  background: var(--green);
+  color: var(--black);
+  box-shadow: 0 0 3.2vw rgba(43,212,23,.30),
+              0 0 .8vw rgba(43,212,23,.38);
+}
+
+/* トップページのパソコン画面と同じ粒子。浮かないようにしています */
+.about__panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(../img/grain.png);
+  background-size: 128px;
+  opacity: .28;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.about__panel > * { position: relative; z-index: 1; }
+
+.about__label {
+  margin: 0 0 1.5rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .26em;
+}
+
+.about__name {
+  margin: 0;
+  font-size: clamp(26px, 2.7vw, 42px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.012em;
+}
+
+.about__meta {
+  margin: 1.1rem 0 0;
+  font-size: clamp(11px, .85vw, 13px);
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.about__body {
+  margin: 2.2rem 0 0;
+  padding-top: 1.9rem;
+  border-top: 1px solid rgba(0,0,0,.28);
+}
+
+.about__body p {
+  margin: 0 0 1.3rem;
+  font-size: clamp(13px, .95vw, 15px);
+  line-height: 2.0;
+  letter-spacing: .025em;
+}
+
+.about__body p:last-child { margin-bottom: 0; }
+
+.about__contact {
+  margin: 2.1rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,.28);
+  font-size: clamp(11.5px, .85vw, 13px);
+  letter-spacing: .07em;
+}
+
+.about__contact a {
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,.45);
+}
+
+.about__contact a:hover { border-bottom-color: transparent; }
+
+
+/* ---------- 右 : 使えるソフト ---------- */
+
+.tools { width: max-content; }
+
+.tools__label {
+  margin: 0 0 1.5rem;
+  padding-bottom: .95rem;
+  border-bottom: 1px solid rgba(255,255,255,.16);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .26em;
+  opacity: .5;
+}
+
+.tools__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 1.7vw, 30px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool { text-align: center; }
+
+/* 普段は色を抜いて部屋に沈め、触れると色が戻ります。
+   作品一覧の壁と同じ考え方です                        */
+.tool img {
+  width: clamp(56px, 5.4vw, 84px);
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: .58;
+  transition: filter .32s ease, opacity .32s ease, transform .32s ease;
+}
+
+.tool span {
+  display: block;
+  margin-top: .75rem;
+  font-size: 10.5px;
+  letter-spacing: .09em;
+  line-height: 1.5;
+  opacity: .38;
+  transition: opacity .32s ease;
+}
+
+.tool:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.tool:hover span { opacity: .88; }
+
+/* カーソルがない端末(スマホ)では最初から色が出ます */
+@media (hover: none) {
+  .tool img  { filter: grayscale(0); opacity: 1; }
+  .tool span { opacity: .6; }
+}
+
+
+/* ---------- 画面が狭いとき ---------- */
+
+@media (max-width: 900px) {
+  :root { --edge: 7vw; }
+
+  .about {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: clamp(40px, 8svh, 70px);
+    padding: clamp(96px, 15svh, 150px) 0 14svh;
+  }
+
+  .about__panel { max-width: none; }
+
+  .tools { width: 100%; }
+  .tools__grid { gap: 5vw; }
+  .tool img { width: min(21vw, 86px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool img { transition: none; }
+  .tool:hover img { transform: none; }
+}

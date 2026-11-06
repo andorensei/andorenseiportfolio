@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>血液 | ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/work-page.css">
+</head>
+
+<!-- ══════════════════════════════════════════════════════════
+     型A ： コンセプト文を「尻」に置く形
+
+       作品名 ／ 年・媒体 ／ hook
+       大きい写真 ＋ サムネイル列
+       本文
+       コンセプト文
+       作品情報
+       一覧へ ／ 次の作品
+
+     見ただけで何か分かる作品(写真作品など)に向いています。
+     先に作品でひっかけて、最後に考え方で回収する形です。
+
+     ▼ 書き換えるのは ★ のついた場所だけです。
+     ▼ 「■」の行から次の「■」の行の手前までが1ブロックです。
+        かたまりごと切り取って貼れば順番が変わります。
+     ▼ 大きい写真とサムネイル列は必ずセットで置いてください。
+        離すと、押したのに変わっていないように見えます。
+     ══════════════════════════════════════════════════════════ -->
+
+<body>
+
+<a class="home" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+
+<!-- ■ title ─────────────────────────────────────────── -->
+<header class="b b-title">
+  <!-- ★ 作品名 -->
+  <h1>血液</h1>
+  <!-- ★ 年・媒体 -->
+  <p class="meta">2024 / 製本</p>
+  <!-- ★ hook : 一文で掴んで、どんな作品かを伝える -->
+  <p class="hook">循環する血液。人種が変わってもその色は変わらない。</p>
+</header>
+
+
+<!-- ■ viewer ───────────────────────────────────────────
+     大きい写真。中身は下のサムネイルで入れ替わります -->
+<div class="b b-viewer">
+  <div class="viewer" id="viewer">
+    <img src="img/work4,1.jpg" alt="作品写真 1枚目">
+  </div>
+  <div class="viewer__bar">
+    <span class="viewer__count"><b id="vNow">01</b> / <span id="vAll">05</span></span>
+    <span class="viewer__arrows">
+      <button type="button" id="vPrev" aria-label="前の写真">&#8249;</button>
+      <button type="button" id="vNext" aria-label="次の写真">&#8250;</button>
+    </span>
+  </div>
+</div>
+
+
+<!-- ■ thumbs ───────────────────────────────────────────
+     ★ 写真を増やすときは、この button をひとつ複製して
+        data-src と中の src を差し替えるだけ。枚数に上限はありません。
+
+     音や映像を入れるときは
+       data-type="video" data-src="img/work4/movie.mp4"
+       data-type="audio" data-src="img/work4/sound.mp3"
+     と書けば、同じ場所で再生されます                        -->
+<div class="b b-thumbs">
+  <div class="thumbs" id="thumbs">
+
+    <button type="button" class="thumb is-on"
+            data-type="image" data-src="img/work4,1.jpg" data-alt="作品写真 1枚目">
+      <img src="img/work4,1.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work4,2.jpg" data-alt="作品写真 2枚目">
+      <img src="img/work4,2.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work4,3.jpg" data-alt="作品写真 3枚目">
+      <img src="img/work4,3.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work4,4.jpg" data-alt="作品写真 4枚目">
+      <img src="img/work4,4.jpg" alt=""></button>
+
+    <button type="button" class="thumb"
+            data-type="image" data-src="img/work4,5.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work4,5.jpg" alt=""></button>
+    
+     <button type="button" class="thumb"
+            data-type="image" data-src="img/work4,6.jpg" data-alt="作品写真 5枚目">
+      <img src="img/work4,6.jpg" alt=""></button>
+
+
+  </div>
+</div>
+
+<!-- ■ statement ─────────────────────────────────────────
+     ★ コンセプト文。この作品の核 -->
+<div class="b b-statement">
+  <p>Concept</p>
+  <p>授業内で与えられた「Echoes in time」というテーマから、「血液」というコンセプトを設定した。この「Echoes in time」という英単語から、直訳では「反響する時間」。そこから、「流行」「流れ」というものにフォーカスし考えた。流行は、時間で変わりゆくもの。流れは、動き続け止まらないもの。この「流行」「流れ」の解釈から、「血液」というコンセプトに至った。また、この蛇腹製本の性質と共通する部分がある。蛇腹製本はページが連続的に繋がり、広げることで「流れ」や「動き」を感じさせる構造を持っている。また、開く、閉じるなどの反復的な動きを持っているため、心臓のポンプの働きと通じる部分がある。
+「血」と言われると、「グロテスク」などの印象が強いが、「生命」で考えると、命を繋ぐような神秘的と捉える考え方もできる。この「血液」とは神秘的とグロテスクという正反対の性質を持つ、不思議な存在と言える。この正反対から出てくる「違和感」というものを取り入れた。
+</p>
+</div>
+
+
+<!-- ■ info ──────────────────────────────────────────────
+     ★ 作品情報。使わない行は、その div ごと消す -->
+<div class="b b-info">
+  <dl class="info">
+    <dt>技法・素材</dt><dd>蛇腹製本・紙、糸</dd>
+    <dt>サイズ</dt><dd>（閉）110mm × 160mm<p>（開）1210mm × 160mm</p></dd>
+    <dt>制作年</dt><dd>2024年</dd>
+  </dl>
+</div>
+
+
+<!-- ■ nav ───────────────────────────────────────────── -->
+<nav class="b b-nav">
+  <a href="works.html">← 一覧へ</a>
+  <!-- ★ 次の作品のファイル名に直す -->
+  <a href="work5.html">次の作品 →</a>
+</nav>
+
+
+<script src="js/work-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANDO RENSEI PORTFOLIO</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-top">
+
+<div class="stage">
+
+  <!-- 机の写真(白黒) -->
+  <img class="stage__bg" src="img/desk.jpg"
+       alt="暗い部屋の机。ノートパソコンとカメラが置かれている"
+       width="2400" height="1602">
+
+  <!-- パソコンの画面 ＝ ポートフォリオの入口 -->
+  <div class="panel">
+    <a class="panel__title" href="index.html">ANDO RENSEI<br>PORTFOLIO</a>
+    <nav class="panel__nav">
+      <a href="works.html">WORKS</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+  </div>
+
+  <!-- カメラの液晶 ＝ 作品のスライドショー
+       写真を増減するときは、この中の img を足し引きする -->
+  <div class="screen" role="img" aria-label="作品写真のスライドショー">
+    <img class="slide" src="img/_DSF5166.jpg" alt="">
+    <img class="slide" src="img/DSC00389.jpg" alt="">
+    <img class="slide" src="img/DSC02125.jpg" alt="">
+    <img class="slide" src="img/DSC02166.jpg" alt="">
+    <img class="slide" src="img/DSC02193.jpg" alt="">
+  </div>
+
+</div>
+
+<script src="js/transition.js"></script>
+</body>
+</html>

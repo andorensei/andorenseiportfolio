@@ -1,0 +1,839 @@
+@charset "UTF-8";
+
+/* ============================================================
+   ANDO RENSEI PORTFOLIO
+   HTML と CSS だけで動きます(JavaScriptなし)
+   index.html / works.html / about.html で共用
+   ============================================================ */
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --green: #2BD417;      /* パソコン画面の蛍光グリーン */
+
+  /* --- 写真の比率(写真を差し替えたらここも直す) --- */
+  --photo-w: 1597;
+  --photo-h: 1066;
+
+  /* --- パソコン画面の位置(写真に対する割合) --- */
+  --panel-left: 11.522%;
+  --panel-top: 25.891%;
+  --panel-width: 55.542%;
+  --panel-height: 52.064%;
+
+  /* --- カメラ液晶の位置(写真に対する割合) --- */
+  --screen-left: 74.833%;
+  --screen-top: 71.036%;
+  --screen-width: 15.458%;
+  --screen-height: 15.231%;
+
+  /* --- 文字まわり --- */
+  --panel-pad: 3.0cqw;   /* 緑の面の内側の余白(四辺そろえる) */
+  --title-size: 7.1cqw;
+  --nav-size: 2.9cqw;
+
+  /* --- スライドショーの速さ --- */
+  --slide-time: 5s;      /* 写真1枚あたりの表示時間 */
+  --slide-total: 25s;    /* 上の時間 × 枚数(5枚なので 5s × 5) */
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans",
+               "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* ════════════════════════════════════════════════
+   index.html(トップページ)
+   ════════════════════════════════════════════════ */
+
+/* 写真が切れないように、画面に収まる大きさで中央に置く。
+   まわりの黒い余白は、写真が暗いのでほぼ見えません        */
+
+.page-top {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+}
+
+.stage {
+  position: relative;
+  width: min(100%, calc(100svh * var(--photo-w) / var(--photo-h)));
+  aspect-ratio: var(--photo-w) / var(--photo-h);
+  container-type: inline-size;
+}
+
+.stage__bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ============ パソコンの画面(緑の面) ============ */
+
+.panel {
+  position: absolute;
+  left: var(--panel-left);
+  top: var(--panel-top);
+  width: var(--panel-width);
+  height: var(--panel-height);
+  padding: var(--panel-pad);
+  background: var(--green);
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.panel__title {
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.015em;
+  color: var(--black);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ナビは右下。視線がカメラの液晶(作品)へ向かうようにしてあります */
+.panel__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: var(--nav-size);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.panel__nav a {
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: 0.2cqw solid transparent;
+}
+
+.panel__nav a:hover,
+.panel__title:hover { border-bottom-color: var(--black); }
+
+.panel__title:hover { opacity: 0.55; border-bottom: 0; }
+
+.panel__title:focus-visible,
+.panel__nav a:focus-visible,
+.title:focus-visible,
+.card__link:focus-visible,
+.arrow:focus-visible {
+  outline: 0.3cqw solid currentColor;
+  outline-offset: 0.4cqw;
+}
+
+
+/* ============ カメラの液晶(スライドショー) ============
+   JavaScriptを使わず、CSSアニメーションだけで切り替えています。
+
+   ◆ 写真の枚数を変えるとき
+     1. index.html の .slide を増やす / 減らす
+     2. --slide-total を「--slide-time × 枚数」に直す
+     3. 下の @keyframes の 20% と 24% を
+        「100 ÷ 枚数」と「それ + 4」に直す
+        (例: 4枚なら 25% と 29%)
+     4. .slide:nth-child(…) の行を枚数ぶん用意する          */
+
+.screen {
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+  overflow: hidden;
+  background: #000;                       /* 常に黒。余白も黒になります */
+  /* 外側を黒でぼかして、本体との境目を消しています */
+  box-shadow: 0 0 .9cqw .25cqw rgba(0,0,0,.92),
+              inset 0 0 .45cqw rgba(0,0,0,.85);
+}
+
+/* パソコンの画面と同じ粒子を液晶にもかけて、浮かないようにしています */
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url(../img/grain.png);
+  background-size: 46px;
+  opacity: .34;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;                    /* 縦写真でも比率が崩れません */
+  opacity: 0;
+  filter: brightness(.74) contrast(1.06) saturate(.94);
+  animation: slide-fade var(--slide-total) linear infinite;
+}
+
+.slide:nth-child(1) { animation-delay: calc(var(--slide-time) * 0); }
+.slide:nth-child(2) { animation-delay: calc(var(--slide-time) * 1); }
+.slide:nth-child(3) { animation-delay: calc(var(--slide-time) * 2); }
+.slide:nth-child(4) { animation-delay: calc(var(--slide-time) * 3); }
+.slide:nth-child(5) { animation-delay: calc(var(--slide-time) * 4); }
+
+@keyframes slide-fade {
+  0%   { opacity: 0; }
+  4%   { opacity: 1; }
+  20%  { opacity: 1; }
+  24%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+/* ════════════════════════════════════════════════
+   works.html / about.html の共通部分
+   ════════════════════════════════════════════════ */
+
+.sheet {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2846 / 1600;
+  container-type: inline-size;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.title {
+  position: absolute;
+  z-index: 2;
+  left: 3.115%;
+  top: 3.0%;
+  margin: 0;
+  font-size: 4.123cqw;
+  font-weight: 700;
+  line-height: 0.8696;
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.title:hover { opacity: 0.55; }
+
+
+/* ════════════════════════════════════════════════
+   works.html(作品一覧 ＝ 壁)
+   写真は1枚。作品8点の位置に透明なリンクを重ねて、
+   カーソルを乗せたときだけ色が戻るようにしています
+   ════════════════════════════════════════════════ */
+
+.page-wall { background: var(--black); }
+
+.wall { position: relative; width: 100%; }
+
+.wall__bg { display: block; width: 100%; height: auto; }
+
+/* タイトルはスクロールしても残す */
+.wall-title {
+  position: fixed;
+  z-index: 5;
+  left: 2.2vw;
+  top: 2.2vw;
+  font-size: clamp(16px, 1.7vw, 27px);
+  font-weight: 700;
+  line-height: .92;
+  letter-spacing: -.01em;
+  color: var(--white);
+  text-decoration: none;
+  text-shadow: 0 .2vw 1.4vw rgba(0,0,0,.95);
+}
+
+.wall-title:hover { opacity: .55; }
+
+/* 作品1点ぶんの当たり。中にカラー版を同じ倍率で入れて、
+   その作品の部分だけが見えるようにずらしてあります        */
+.pin {
+  position: absolute;
+  left: calc(var(--l) * 1%);
+  top: calc(var(--t) * 1%);
+  width: calc(var(--w) * 1%);
+  height: calc(var(--h) * 1%);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .38s ease;
+
+  /* 四隅をぼかして、四角い枠に見えないようにしています。
+     光が当たったように見せるための処理です                */
+  -webkit-mask-image:
+      linear-gradient(to right,  transparent 0, #000 6%, #000 94%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
+          mask-image:
+      linear-gradient(to right,  transparent 0, #000 6%, #000 94%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+
+.pin img {
+  position: absolute;
+  max-width: none;
+  width: calc(100% * 100 / var(--w));
+  left: calc(-100% * var(--l) / var(--w));
+  top: calc(-100% * var(--t) / var(--h));
+}
+
+/* カーソルがある端末 : 触れたものだけ色が戻る */
+@media (hover: hover) {
+  .pin:hover, .pin:focus-visible { opacity: 1; }
+}
+
+/* カーソルがない端末(スマホ・タブレット) : 最初から全部カラー */
+@media (hover: none) {
+  .pin { opacity: 1; }
+}
+
+.pin:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+
+
+/* ════════════════════════════════════════════════
+   work1.html … work8.html(作品ページ)
+
+   左に文章、右に作品。1画面に収まります。
+   写真は「高さをそろえて、幅は写真なりに」出るので、
+   縦写真と横写真が混ざっても余白が出ません。
+   ════════════════════════════════════════════════ */
+
+.page-work { background: var(--black); overflow: hidden; }
+
+.work {
+  display: grid;
+  grid-template-columns: minmax(360px, 38vw) 1fr;
+  gap: 3.4vw;
+  height: 100svh;
+  padding: 3.0vw 3.2vw 2.4vw;
+}
+
+
+/* ---------- 左 : 文章 ---------- */
+
+.work__text {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 1.4vw;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.22) transparent;
+}
+
+.work__text::-webkit-scrollbar { width: 6px; }
+.work__text::-webkit-scrollbar-thumb { background: rgba(255,255,255,.22); border-radius: 3px; }
+
+.work__home {
+  font-size: clamp(15px, 1.25vw, 20px);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.01em;
+  color: var(--white);
+  text-decoration: none;
+  margin-bottom: 2.6rem;
+}
+
+.work__home:hover { opacity: .55; }
+
+.work__title {
+  margin: 0;
+  font-size: clamp(25px, 2.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -.005em;
+}
+
+.work__meta {
+  margin: .95rem 0 0;
+  font-size: 12px;
+  letter-spacing: .13em;
+  opacity: .48;
+}
+
+.work__lead {
+  margin: 2.1rem 0 0;
+  padding-top: 1.9rem;
+  border-top: 1px solid rgba(255,255,255,.15);
+  font-size: clamp(15px, 1.12vw, 18px);
+  line-height: 1.92;
+  letter-spacing: .02em;
+}
+
+.work__body { margin-top: 2.1rem; }
+
+.work__body p {
+  margin: 0 0 1.5rem;
+  font-size: clamp(13.5px, .97vw, 15.5px);
+  line-height: 2.05;
+  letter-spacing: .025em;
+  opacity: .78;
+}
+
+.work__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: auto;
+  padding-top: 2.6rem;
+  font-size: 12.5px;
+  letter-spacing: .07em;
+}
+
+.work__nav a { color: var(--white); text-decoration: none; opacity: .62; }
+.work__nav a:hover { opacity: 1; color: var(--green); }
+
+
+/* ---------- 右 : 作品 ---------- */
+
+.work__media {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  min-height: 0;
+  gap: 1.1rem;
+}
+
+/* 高さだけそろえて、幅は写真の形にまかせる(ここが肝です) */
+.viewer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  cursor: pointer;
+}
+
+.viewer__img,
+.viewer video {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  transition: opacity .2s ease;
+}
+
+.viewer.is-swapping .viewer__img,
+.viewer.is-swapping video { opacity: 0; }
+
+/* 音だけの素材のとき */
+.viewer__audio {
+  width: min(100%, 520px);
+  align-self: center;
+}
+
+.viewer__audio audio { width: 100%; }
+
+
+.viewer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: .12em;
+  opacity: .55;
+}
+
+.viewer__count b { font-weight: 700; }
+
+.viewer__arrows button {
+  background: none;
+  border: 0;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 1;
+  padding: 0 .45rem;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.viewer__arrows button:hover { opacity: 1; color: var(--green); }
+
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: .5rem;
+  max-height: 24svh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.22) transparent;
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  background: #111;
+  cursor: pointer;
+  opacity: .42;
+  transition: opacity .22s ease;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumb:hover { opacity: .78; }
+
+/* 選んでいるもの ＝ 緑。トップページの緑と同じ意味です */
+.thumb.is-on { opacity: 1; }
+.thumb.is-on::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--green);
+  pointer-events: none;
+}
+
+.thumb:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+/* 音・映像のサムネイルには印をつける */
+.thumb[data-type="video"]::before,
+.thumb[data-type="audio"]::before {
+  content: "▶";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 15px;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,.9);
+  z-index: 1;
+}
+.thumb[data-type="audio"]::before { content: "♪"; font-size: 18px; }
+
+
+/* ---------- 画面が狭いとき(スマホ・タブレット) ---------- */
+
+@media (max-width: 900px) {
+  .page-work { overflow: visible; }
+
+  .work {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 2.2rem;
+    padding: 5vw 5vw 10vw;
+  }
+
+  .work__media { order: -1; gap: .8rem; }
+  .work__text  { overflow: visible; padding-right: 0; }
+
+  .viewer { height: 56svh; }
+  .thumbs { grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); max-height: none; }
+
+  .work__nav { padding-top: 2rem; }
+}
+
+
+/* ════════════════════════════════════════════════
+   about.html
+   ════════════════════════════════════════════════ */
+
+.about-body {
+  position: absolute;
+  left: 3.2326%;
+  top: 22%;
+  width: 52%;
+  background: var(--green);
+  color: var(--black);
+  padding: 2.4cqw;
+}
+
+.about-body h2 {
+  margin: 0 0 1.4cqw;
+  font-size: 3.6cqw;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.about-body p {
+  margin: 0 0 1cqw;
+  font-size: 1.5cqw;
+  line-height: 1.85;
+}
+
+
+/* ════════════════════════════════════════════════
+   タブレット・スマホ
+   ════════════════════════════════════════════════ */
+
+@media (max-width: 820px) {
+
+  /* --- トップページ --- */
+  .page-top { display: block; min-height: 0; }
+
+  .stage {
+    width: 100%;
+    aspect-ratio: auto;
+    container-type: normal;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stage__bg { order: 3; height: auto; }
+
+  .panel {
+    order: 1;
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 22px 16px 26px;
+    gap: 34px;
+  }
+
+  .panel__title { font-size: 34px; line-height: 0.95; }
+  .panel__nav { font-size: 20px; }
+
+  /* スライドの位置の基準になるので relative のままにする */
+  .screen {
+    order: 2;
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .panel__title:focus-visible,
+  .panel__nav a:focus-visible,
+  .title:focus-visible,
+  .card__link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  /* --- 作品一覧 / About --- */
+  .sheet {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px 16px 32px;
+    container-type: normal;
+  }
+
+  .title { position: static; width: 100%; font-size: 26px; line-height: 0.95; }
+
+  .carousel { position: static; width: 100%; }
+  .window { position: static; overflow: visible; }
+
+  .track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 14px;
+    transform: none !important;
+  }
+
+  .card { flex: none; }
+  .card__text { margin-top: 8px; font-size: 15px; }
+
+  .arrows, .pos { display: none; }
+
+  .about-body {
+    position: static;
+    width: 100%;
+    padding: 20px 16px 24px;
+  }
+  .about-body h2 { font-size: 26px; margin-bottom: 12px; }
+  .about-body p { font-size: 15px; margin-bottom: 10px; }
+}
+
+
+/* ════════════════════════════════════════════════
+   動きを減らす設定の人向け
+   ════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide { animation: none; opacity: 0; }
+  .slide:first-child { opacity: 1; }
+  .track { transition: none; }
+}
+
+
+/* ════════════════════════════════════════════════
+   画面の質感をそろえる
+   ブラウザの文字はツルッとしすぎて写真から浮くので、
+   写真と同じ量の粒子をかぶせて、画面を少し発光させています
+   ════════════════════════════════════════════════ */
+
+.panel {
+  box-shadow: 0 0 3.4cqw rgba(43, 212, 23, .34),
+              0 0 0.9cqw rgba(43, 212, 23, .42);
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(../img/grain.png);
+  background-size: 128px;
+  opacity: .30;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.panel__title, .panel__nav { filter: blur(.055cqw); }
+
+
+/* ════════════════════════════════════════════════
+   ページ遷移の演出(3種類)
+   切り替えは js/transition.js の MODE を書き換えるだけ
+   ════════════════════════════════════════════════ */
+
+/* --- 共通 : 到着したページが落ち着く動き --- */
+.is-entering > * { animation: page-settle .62s cubic-bezier(.33,0,.2,1); }
+@keyframes page-settle { 0% { transform: scale(1.06); } 100% { transform: scale(1); } }
+
+
+/* ---------- 映像でつなぐ(WORKS へ行くときの標準) ----------
+   出るとき : トップページがブレて暗くなる
+   着くとき : カメラを振った映像が流れ、終わると壁になる     */
+
+.is-blurring-out { animation: blur-away .26s cubic-bezier(.5,0,1,.6) forwards; }
+@keyframes blur-away {
+  100% { filter: blur(16px) brightness(.45); transform: scale(1.05); }
+}
+
+.whipvid {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.whipvid--out { opacity: 0; transition: opacity .20s linear; }
+
+
+/* ---------- A : 画面の中へ入る ---------- */
+
+.veil {
+  position: fixed;
+  z-index: 50;
+  background: var(--green);
+  transition: left .52s cubic-bezier(.65,0,.35,1), top .52s cubic-bezier(.65,0,.35,1),
+              width .52s cubic-bezier(.65,0,.35,1), height .52s cubic-bezier(.65,0,.35,1);
+  pointer-events: none;
+}
+
+.veil--full { left: 0 !important; top: 0 !important; width: 100% !important; height: 100% !important; }
+
+.enter--enter::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--green);
+  transform-origin: 50% 46%;
+  animation: veil-open .62s cubic-bezier(.33,0,.2,1) forwards;
+  pointer-events: none;
+}
+
+@keyframes veil-open {
+  0%   { transform: scale(1);    opacity: 1; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+
+/* ---------- B : カメラが左へ動く ---------- */
+
+.is-panning-out {
+  animation: pan-out .46s cubic-bezier(.5,0,.75,0) forwards;
+}
+
+@keyframes pan-out {
+  0%   { transform: translateX(0);    opacity: 1; }
+  100% { transform: translateX(26%);  opacity: 0; }
+}
+
+.enter--pan > * { animation: pan-in .56s cubic-bezier(.22,.8,.3,1); }
+
+@keyframes pan-in {
+  0%   { transform: translateX(-24%); opacity: 0; }
+  100% { transform: translateX(0);    opacity: 1; }
+}
+
+
+/* ---------- C : 緑の帯が横切る ---------- */
+
+.wipe {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  background: var(--green);
+  transform: translateX(-100%);
+  transition: transform .52s cubic-bezier(.7,0,.3,1);
+  pointer-events: none;
+}
+
+.wipe--in { transform: translateX(0); }
+
+.enter--wipe::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--green);
+  animation: wipe-out .56s cubic-bezier(.7,0,.3,1) forwards;
+  pointer-events: none;
+}
+
+@keyframes wipe-out {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+
+/* ---------- D : ブレながらカメラを振る(ホイップパン) ---------- */
+
+.is-whipping-out {
+  animation: whip-out .38s cubic-bezier(.45,0,.9,.35) forwards;
+}
+
+@keyframes whip-out {
+  0%   { transform: translateX(0)     scaleX(1);    filter: blur(0px);  opacity: 1; }
+  55%  { transform: translateX(9%)    scaleX(1.05); filter: blur(10px); opacity: 1; }
+  100% { transform: translateX(26%)   scaleX(1.12); filter: blur(26px); opacity: .25; }
+}
+
+.enter--whip > * { animation: whip-in .52s cubic-bezier(.12,.72,.24,1); }
+
+@keyframes whip-in {
+  0%   { transform: translateX(-26%)  scaleX(1.12); filter: blur(26px); opacity: .25; }
+  45%  { transform: translateX(-7%)   scaleX(1.04); filter: blur(8px);  opacity: 1; }
+  100% { transform: translateX(0)     scaleX(1);    filter: blur(0px);  opacity: 1; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .veil, .wipe { transition: none; }
+  .is-blurring-out { animation: none; }
+  .whipvid { display: none; }
+  .is-whipping-out, .enter--whip > * { animation: none; }
+  .is-entering > *, .is-panning-out,
+  .enter--enter::before, .enter--wipe::before { animation: none; }
+  .enter--enter::before, .enter--wipe::before { display: none; }
+}
